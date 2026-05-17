@@ -761,6 +761,60 @@ ruby rt {
   line-height: 1.4;
 }
 
+/* ===== Lightbox overlay (click to zoom in-page) ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  cursor: zoom-out;
+  animation: lb-fade 160ms ease-out;
+}
+.lightbox[hidden] { display: none; }
+.lightbox-img {
+  max-width: 95vw;
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.6);
+  cursor: default;
+}
+.lightbox-close {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 26px;
+  font-family: var(--sans);
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 160ms ease, transform 120ms ease;
+}
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(1.06);
+}
+@keyframes lb-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 720px) {
   .topbar-inner { flex-wrap: wrap; gap: 10px; padding: 12px 18px; }
