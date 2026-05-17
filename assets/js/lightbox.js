@@ -9,35 +9,31 @@
   const img = lb.querySelector(".lightbox-img");
   const closeBtn = lb.querySelector(".lightbox-close");
 
-  // Every clickable figure anchor opens in the lightbox instead of a new tab.
-  const triggers = document.querySelectorAll(".figure a, .salt-figure a");
-
-  function open(href, alt) {
+  function show(href, alt) {
     img.src = href;
     img.alt = alt || "";
-    lb.hidden = false;
-    // Lock background scroll while the lightbox is open.
+    lb.removeAttribute("hidden");
     document.body.style.overflow = "hidden";
   }
 
-  function close() {
-    lb.hidden = true;
-    // Clear src so the next open can re-trigger the load transition.
+  function hide() {
+    lb.setAttribute("hidden", "");
     img.src = "";
     document.body.style.overflow = "";
   }
 
-  triggers.forEach(function (a) {
+  // Every clickable figure anchor opens in the lightbox instead of a new tab.
+  document.querySelectorAll(".figure a, .salt-figure a").forEach(function (a) {
     a.addEventListener("click", function (e) {
       e.preventDefault();
       const innerImg = a.querySelector("img");
-      open(a.getAttribute("href"), innerImg ? innerImg.alt : "");
+      show(a.getAttribute("href"), innerImg ? innerImg.alt : "");
     });
   });
 
   // Click anywhere on the backdrop (but not on the image itself) closes.
   lb.addEventListener("click", function (e) {
-    if (e.target === lb || e.target === closeBtn) close();
+    if (e.target === lb || e.target === closeBtn) hide();
   });
 
   // Stop image clicks from bubbling to the backdrop.
@@ -47,6 +43,6 @@
 
   // Escape key closes.
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !lb.hidden) close();
+    if (e.key === "Escape" && !lb.hasAttribute("hidden")) hide();
   });
 })();
