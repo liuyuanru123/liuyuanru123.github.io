@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuanru Liu · 劉 淵茹</title>
+  <meta name="description" content="Yuanru Liu — Master's student at Kyushu University, Mathematical Modeling Lab. Deep learning for rainfall prediction." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ====== Top bar ====== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">
+        <span class="lang-ja">劉 淵茹</span>
+        <span class="lang-en">Yuanru Liu</span>
+      </a>
+      <nav class="nav">
+        <a href="#about"><span class="lang-ja">自己紹介</span><span class="lang-en">About</span></a>
+        <a href="#news"><span class="lang-ja">最新</span><span class="lang-en">News</span></a>
+        <a href="#publications"><span class="lang-ja">論文</span><span class="lang-en">Publications</span></a>
+        <a href="#activities"><span class="lang-ja">学会</span><span class="lang-en">Activities</span></a>
+        <a href="#projects"><span class="lang-ja">プロジェクト</span><span class="lang-en">Projects</span></a>
+        <a href="#education"><span class="lang-ja">学歴</span><span class="lang-en">Education</span></a>
+        <a href="#experience"><span class="lang-ja">アルバイト</span><span class="lang-en">Part-time</span></a>
+        <a href="#skills"><span class="lang-ja">スキル</span><span class="lang-en">Skills</span></a>
+        <a href="#contact"><span class="lang-ja">連絡先</span><span class="lang-en">Contact</span></a>
+      </nav>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-set-lang="ja" aria-pressed="true">日本語</button>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ====== Hero ====== -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-photo">
+          <img class="avatar" src="Image/personal.jpg" alt="Yuanru Liu" width="360" height="360" />
+        </div>
+        <div class="hero-text">
+          <h1>
+            <span class="lang-ja"><ruby>劉<rt>リュウ</rt></ruby> <ruby>淵茹<rt>エンジョ</rt></ruby></span>
+            <span class="lang-en">Yuanru Liu</span>
+          </h1>
+          <p class="subtle">
+            <span class="lang-ja">Yuanru Liu （刘渊茹）</span>
+            <span class="lang-en">劉 淵茹 · 刘渊茹</span>
+          </p>
+          <p class="lead">
+            <span class="lang-ja">深層学習による降雨予測・時系列データ解析を研究しています。<br />
+              九州大学大学院 修士課程 ／ 応用統計学のバックグラウンドから機械学習へ。</span>
+            <span class="lang-en">I research deep learning for rainfall prediction and time-series data analysis.<br />
+              M.S. student at Kyushu University, bridging applied statistics and machine learning.</span>
+          </p>
+          <p class="affiliation">
+            <span class="lang-ja">九州大学大学院 生物資源環境科学府 ・ 数理モデリング学研究室</span>
+            <span class="lang-en">Graduate School of Bioresource and Bioenvironmental Sciences, Kyushu University · Mathematical Modeling Lab</span><br />
+            <span class="subtle">
+              <span class="lang-ja">指導教員: </span><span class="lang-en">Advisor: </span>
+              <a href="https://www.agr.kyushu-u.ac.jp/lab/ta/" target="_blank" rel="noopener">Assoc. Prof. Ton Viet Ta</a>
+            </span>
+          </p>
+          <p class="tagline">
+            <span class="lang-ja">🔍 <strong>機械学習・深層学習に関する研究機会を求めています。</strong></span>
+            <span class="lang-en">🔍 <strong>Seeking research opportunities in machine learning and deep learning.</strong></span>
+          </p>
+          <div class="hero-links">
+            <a href="mailto:yuanruliu123@gmail.com">✉ Email</a>
+            <a href="https://github.com/liuyuanru123" target="_blank" rel="noopener">⌨ GitHub</a>
+            <a href="#publications">📄 <span class="lang-ja">論文</span><span class="lang-en">Publications</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== About ====== -->
+    <section id="about" class="section">
+      <h2><span class="lang-ja">🙋 自己紹介</span><span class="lang-en">🙋 About Me</span></h2>
+      <div class="lang-ja">
+        <p>
+          九州大学大学院 生物資源環境科学府にて、<strong>Ton Viet Ta 准教授</strong>指導のもと
+          <a href="https://www.agr.kyushu-u.ac.jp/lab/ta/" target="_blank" rel="noopener">数理モデリング学研究室</a>
+          に所属する修士課程の学生です。学部では<strong>応用統計学</strong>を専攻し、
+          現在はそのバックグラウンドを活かして<strong>深層学習</strong>による
+          降雨予測・時系列データ解析に取り組んでいます。
+        </p>
+        <p>
+          研究テーマの実装にとどまらず、<strong>Web アプリ・デスクトップアプリ</strong>
+          まで含めたエンドツーエンドの開発経験を有しています。<strong>機械学習および
+          深層学習に関する研究機会</strong>を広く求めており、博士課程への進学を準備中です。
+        </p>
+      </div>
+      <div class="lang-en">
+        <p>
+          I am a Master&apos;s student at the
+          <a href="https://www.agr.kyushu-u.ac.jp/lab/ta/" target="_blank" rel="noopener">Mathematical Modeling Lab</a>,
+          Graduate School of Bioresource and Bioenvironmental Sciences, Kyushu University,
+          supervised by <strong>Associate Professor Ton Viet Ta</strong>. My undergraduate
+          background is in <strong>Applied Statistics</strong>, and I now apply that
+          foundation to <strong>deep learning</strong> for rainfall prediction and
+          time-series data analysis.
+        </p>
+        <p>
+          Beyond model development, I deliver research through <strong>full end-to-end
+          implementations</strong> — including both web and desktop applications. I am
+          actively <strong>seeking research opportunities in machine learning and deep
+          learning</strong>, and preparing PhD program applications.
+        </p>
+      </div>
+
+      <figure class="figure figure-wide">
+        <a href="Image/researchflowchart.png" target="_blank" rel="noopener">
+          <img src="Image/researchflowchart.png" alt="Research workflow: data → preprocessing → modeling → visualization → app deployment" loading="lazy" />
+        </a>
+        <figcaption>
+          <span class="lang-ja"><strong>研究フロー</strong> — 気象データの前処理・特徴量設計から深層学習モデル設計、可視化、そして Web / Desktop アプリの実装までの全体像。</span>
+          <span class="lang-en"><strong>Research workflow</strong> — from preprocessing and feature engineering of meteorological data, through deep learning model design and visualization, to deployment as web/desktop applications.</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ====== News ====== -->
+    <section id="news" class="section">
+      <h2><span class="lang-ja">📰 最新</span><span class="lang-en">📰 News</span></h2>
+      <ul class="news-list">
+        <li>
+          <span class="news-date">2026.05</span>
+          <span class="lang-ja">論文 <em>RainNet-MT</em> を <em>CMC – Computers, Materials &amp; Continua</em> に投稿、査読中。</span>
+          <span class="lang-en">Submitted manuscript <em>RainNet-MT</em> to <em>CMC – Computers, Materials &amp; Continua</em>; under review.</span>
+        </li>
+        <li>
+          <span class="news-date">2026</span>
+          <span class="lang-ja">機械学習・深層学習分野の博士課程プログラムへの出願準備中。</span>
+          <span class="lang-en">Preparing PhD applications in machine learning / deep learning.</span>
+        </li>
+        <li>
+          <span class="news-date"><span class="lang-ja">継続中</span><span class="lang-en">Ongoing</span></span>
+          <span class="lang-ja">降雨予測モデル <em>RainNet-MT</em> の Web / Desktop アプリケーション開発・改良。</span>
+          <span class="lang-en">Continued development of the <em>RainNet-MT</em> web and desktop applications.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ====== Publications ====== -->
+    <section id="publications" class="section">
+      <h2><span class="lang-ja">📄 論文</span><span class="lang-en">📄 Publications</span></h2>
+      <h3 class="sub">
+        <span class="lang-ja">査読中 / Under Review</span>
+        <span class="lang-en">Under Review</span>
+      </h3>
+      <ol class="pub-list">
+        <li>
+          <strong>Yuanru Liu</strong>, Ton Viet Ta.
+          <em>RainNet-MT: A Multi-Task Deep Learning Framework for
+            Simultaneous Rainfall Occurrence and Intensity Prediction.</em>
+          <span class="venue">Manuscript under review at <em>CMC – Computers, Materials &amp; Continua</em>, 2026.</span>
+        </li>
+      </ol>
+
+      <figure class="figure">
+        <a href="Image/model.png" target="_blank" rel="noopener">
+          <img src="Image/model.png" alt="RainNet-MT model architecture: Multi-Scale Conv1D + Bidirectional GRU + Attention + cascaded Binary/Intensity heads" loading="lazy" />
+        </a>
+        <figcaption>
+          <span class="lang-ja"><strong>RainNet-MT モデル構造</strong> — Multi-Scale Conv1D Block と Bidirectional GRU、Attention Layer を経て、降水有無を判定する <em>Binary Head</em> と降水強度を予測する <em>Intensity Head</em> を直列に配置したマルチタスク・アーキテクチャ。</span>
+          <span class="lang-en"><strong>RainNet-MT architecture</strong> — multi-scale Conv1D + bidirectional GRU + attention, with a cascaded <em>binary head</em> (rainfall occurrence) and <em>intensity head</em> (rainfall amount) for multi-task prediction.</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ====== Academic Activities ====== -->
+    <section id="activities" class="section">
+      <h2><span class="lang-ja">🎤 学会活動</span><span class="lang-en">🎤 Academic Activities</span></h2>
+      <ul class="news-list activities-list">
+        <li>
+          <span class="news-date">2024.11 – 12</span>
+          <span>
+            <a href="https://www.agr.kyushu-u.ac.jp/lab/ta/wis2024.html" target="_blank" rel="noopener"><strong>The Workshop on Interdisciplinary Sciences (WIS 2024)</strong></a><br />
+            <span class="subtle">
+              <span class="lang-ja">2024.11.28 – 12.01 ／ 九州大学 伊都キャンパス ＋ 九重共同研修所 ／ <em>聴講参加</em>（発表なし）</span>
+              <span class="lang-en">Nov 28 – Dec 1, 2024 / Kyushu University Ito Campus &amp; Kuju Training Center / <em>Attended</em> (no presentation)</span>
+            </span>
+          </span>
+        </li>
+        <li>
+          <span class="news-date">2023.09</span>
+          <span>
+            <a href="https://www.agr.kyushu-u.ac.jp/lab/ta/wis2023.html" target="_blank" rel="noopener"><strong>The Workshop on Interdisciplinary Sciences (WIS 2023)</strong></a><br />
+            <span class="subtle">
+              <span class="lang-ja">2023.09.14 – 09.15 ／ 九州大学 伊都キャンパス ／ <em>聴講参加</em>（発表なし）</span>
+              <span class="lang-en">Sep 14 – 15, 2023 / Kyushu University Ito Campus / <em>Attended</em> (no presentation)</span>
+            </span>
+          </span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ====== Projects (featured) ====== -->
+    <section id="projects" class="section">
+      <h2><span class="lang-ja">💻 主要プロジェクト</span><span class="lang-en">💻 Selected Projects</span></h2>
+      <p class="section-lead">
+        <span class="lang-ja">研究成果を<strong>論文発表だけでなく実用化まで届ける</strong>ことを意識しており、同一研究テーマに対して複数のフロントエンド（Web / Desktop）を実装しています。</span>
+        <span class="lang-en">I am intentional about taking research <strong>all the way to usable software</strong>, implementing the same model behind multiple frontends (web + desktop).</span>
+      </p>
+
+      <!-- Featured project: RainNet-MT -->
+      <article class="featured-project">
+        <header class="fp-head">
+          <div>
+            <h3>🌧️ RainNet-MT</h3>
+            <p class="fp-sub">
+              <span class="lang-ja">マルチタスク深層学習による降雨予測フレームワーク</span>
+              <span class="lang-en">Multi-Task Deep Learning Framework for Rainfall Prediction</span>
+            </p>
+          </div>
+          <span class="status-pill">
+            <span class="lang-ja">論文査読中</span>
+            <span class="lang-en">Paper Under Review</span>
+          </span>
+        </header>
+        <p class="fp-desc">
+          <span class="lang-ja">修士研究のフラッグシップ・プロジェクト。降雨の<strong>発生有無</strong>と<strong>降水強度</strong>を単一モデルで同時に予測するマルチタスク深層学習フレームワークの提案・実装。論文を <em>CMC – Computers, Materials &amp; Continua</em> 誌へ投稿（査読中）。研究を <strong>3 つの実装形態</strong>で届けています。</span>
+          <span class="lang-en">The flagship project of my Master&apos;s research. A multi-task deep learning framework that jointly predicts <strong>rainfall occurrence</strong> and <strong>rainfall intensity</strong> from a single model. Manuscript under review at <em>CMC – Computers, Materials &amp; Continua</em>. Delivered in <strong>three forms</strong>.</span>
+        </p>
+
+        <figure class="figure figure-inline">
+          <a href="Image/predictionflow.png" target="_blank" rel="noopener">
+            <img src="Image/predictionflow.png" alt="RainNet-MT inference flow: first predict occurrence; if rain, classify intensity as light / medium / heavy" loading="lazy" />
+          </a>
+          <figcaption>
+            <span class="lang-ja"><strong>推論フロー</strong> — 入力データに対し、まず<strong>降水の有無</strong>を判定。降水ありの場合のみ<strong>降水強度</strong>（弱雨 / 中雨 / 強雨）を出力する Cascaded 構成。</span>
+            <span class="lang-en"><strong>Inference flow</strong> — the model first decides <strong>whether it will rain</strong>; only when rain is detected does it output the <strong>intensity class</strong> (light / medium / heavy) — a cascaded design.</span>
+          </figcaption>
+        </figure>
+
+        <div class="fp-children">
+          <a class="fp-child" href="https://github.com/liuyuanru123/RainNet-MT-webapp" target="_blank" rel="noopener">
+            <div class="fp-child-head">🌐 <span class="lang-ja">Web アプリ</span><span class="lang-en">Web App</span></div>
+            <p class="lang-ja">Flask による Python バックエンド + HTML/CSS/JS フロントエンド。REST API 連携。</p>
+            <p class="lang-en">Flask Python backend + HTML/CSS/JS frontend, connected via REST API.</p>
+            <div class="tags">Python · Flask · HTML/CSS/JS · PyTorch</div>
+          </a>
+          <a class="fp-child" href="https://github.com/liuyuanru123/RainNet-MT-rainfall-prediction-APP" target="_blank" rel="noopener">
+            <div class="fp-child-head">🖥️ <span class="lang-ja">デスクトップアプリ</span><span class="lang-en">Desktop App</span></div>
+            <p class="lang-ja">PyQt5 によるネイティブ GUI。モデルロード、リアルタイム推論、結果可視化を統合。</p>
+            <p class="lang-en">PyQt5 native GUI integrating model loading, real-time inference, and result visualization.</p>
+            <div class="tags">Python · PyQt5 · PyTorch</div>
+          </a>
+          <div class="fp-child fp-child--paper">
+            <div class="fp-child-head">📄 <span class="lang-ja">論文</span><span class="lang-en">Paper</span></div>
+            <p class="lang-ja">マルチタスク損失設計と気象データへの適用。査読中。</p>
+            <p class="lang-en">Multi-task loss design and meteorological application. Under review.</p>
+            <div class="tags">CMC, 2026</div>
+          </div>
+        </div>
+
+        <div class="fp-deployment">
+          <h4 class="fp-deployment-title">
+            <span class="lang-ja">☁️ クラウドへの本番デプロイ実装</span>
+            <span class="lang-en">☁️ Production Deployment on AWS</span>
+          </h4>
+          <p class="fp-deployment-desc">
+            <span class="lang-ja">研究を<strong>論文だけで終わらせず</strong>、<strong>本番想定のクラウドシステム</strong>として実装。Amazon EC2 上で <strong>①Flask API → ②cron スケジューラ → ③Weather Data Fetcher → ④RainNet-MT 推論モデル → ⑤通知判断</strong> の 5 段階パイプラインを稼働、Amazon RDS (MySQL) に予測結果を保存。<strong>IoT センサー（雨量・水位・土壌）</strong>からのリアルタイム観測と外部 Weather API (JMA / OpenWeather) の双方を入力に統合し、Amazon SNS を経由して降雨通知を自前の <strong>Web / Desktop アプリ</strong>へ配信、CloudWatch で全プロセスをロギング。コスト最適化のため、後に<strong>さくらのレンタルサーバ</strong>へ一部を移行する判断も自ら実施。</span>
+            <span class="lang-en">Took the research <strong>beyond a paper</strong> and implemented a <strong>production-style cloud system</strong>. Amazon EC2 hosts a 5-stage pipeline: <strong>①Flask API → ②cron scheduler → ③Weather Data Fetcher → ④RainNet-MT inference → ⑤Notification Judgement</strong>; predictions persist to Amazon RDS (MySQL). <strong>IoT sensors (rainfall, water-level, soil)</strong> stream real-time observations alongside external Weather APIs (JMA / OpenWeather); Amazon SNS publishes rainfall alerts to my own <strong>Web / Desktop applications</strong>; CloudWatch logs every stage. Later migrated parts of the stack to <strong>Sakura Rental Server</strong> for cost optimization.</span>
+          </p>
+          <figure class="figure fp-deployment-figure">
+            <a href="Image/aws_deployment.svg" target="_blank" rel="noopener">
+              <img src="Image/aws_deployment.svg" alt="AWS deployment architecture: EC2 + Flask + RainNet-MT + cron + RDS + SNS + CloudWatch + VPC" loading="lazy" />
+            </a>
+            <figcaption>
+              <span class="lang-ja"><strong>AWS デプロイ構成図</strong> — RainNet-MT 降雨予測通知システムのクラウド実装。EC2・RDS・CloudWatch・SNS・VPC を用いた本番想定の構成。</span>
+              <span class="lang-en"><strong>AWS deployment architecture</strong> — production-style cloud implementation of the RainNet-MT rainfall notification system using EC2, RDS, CloudWatch, SNS, and VPC.</span>
+            </figcaption>
+          </figure>
+          <div class="tech-tags">
+            <span class="tech-tag">AWS EC2 (Ubuntu)</span>
+            <span class="tech-tag">Amazon RDS (MySQL)</span>
+            <span class="tech-tag">CloudWatch</span>
+            <span class="tech-tag">SNS</span>
+            <span class="tech-tag">VPC</span>
+            <span class="tech-tag">Flask · REST API</span>
+            <span class="tech-tag">cron</span>
+            <span class="tech-tag">IoT Sensors</span>
+            <span class="tech-tag tech-tag--alt">Sakura Rental Server</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== Secondary featured: Salt monitoring (hardware) ===== -->
+      <article class="featured-project featured-project--secondary">
+        <header class="fp-head">
+          <div>
+            <h3>🧂 <span class="lang-ja">塩生産プロセス・モニタリング</span><span class="lang-en">Salt Production Monitoring</span></h3>
+            <p class="fp-sub">
+              <span class="lang-ja">Arduino × IoT センサーによる組込み環境モニタリング</span>
+              <span class="lang-en">Arduino-based embedded environmental monitoring</span>
+            </p>
+          </div>
+          <span class="status-pill status-pill--alt">
+            <span class="lang-ja">Hardware</span>
+            <span class="lang-en">Hardware</span>
+          </span>
+        </header>
+        <p class="fp-desc">
+          <span class="lang-ja"><strong>ハードウェア × 組込み</strong>の練習プロジェクト。Arduino Uno で複数センサーを統合し、屋外塩田に設置して SD カードに記録するモニタリング。設計 → 制作 → 設置 → 記録まで一貫して実施。</span>
+          <span class="lang-en">A <strong>hardware &amp; embedded</strong> practice project: an Arduino Uno integrating several sensors, deployed outdoors at a salt field, logging to an SD card. Carried through end-to-end: design → build → deploy → record.</span>
+        </p>
+        <div class="salt-gallery">
+          <figure class="salt-figure">
+            <a href="Image/salt/0.png" target="_blank" rel="noopener">
+              <img src="Image/salt/0.png" alt="Wiring and circuit design diagram" loading="lazy" />
+            </a>
+            <figcaption>
+              <strong>① <span class="lang-ja">設計</span><span class="lang-en">Design</span></strong><br />
+              <span class="lang-ja">回路・配線図</span>
+              <span class="lang-en">Circuit &amp; wiring</span>
+            </figcaption>
+          </figure>
+          <figure class="salt-figure">
+            <a href="Image/salt/1.jpg" target="_blank" rel="noopener">
+              <img src="Image/salt/1.jpg" alt="Hardware assembly on workbench" loading="lazy" />
+            </a>
+            <figcaption>
+              <strong>② <span class="lang-ja">制作</span><span class="lang-en">Build</span></strong><br />
+              <span class="lang-ja">ハードウェア組立</span>
+              <span class="lang-en">Hardware assembly</span>
+            </figcaption>
+          </figure>
+          <figure class="salt-figure">
+            <a href="Image/salt/1.2.2.jpg" target="_blank" rel="noopener">
+              <img src="Image/salt/1.2.2.jpg" alt="Field installation at outdoor salt production site" loading="lazy" />
+            </a>
+            <figcaption>
+              <strong>③ <span class="lang-ja">現場設置</span><span class="lang-en">Deploy</span></strong><br />
+              <span class="lang-ja">屋外塩田で設置</span>
+              <span class="lang-en">Outdoor field install</span>
+            </figcaption>
+          </figure>
+          <figure class="salt-figure">
+            <a href="Image/salt/2.png" target="_blank" rel="noopener">
+              <img src="Image/salt/2.png" alt="Recorded sensor data on SD card" loading="lazy" />
+            </a>
+            <figcaption>
+              <strong>④ <span class="lang-ja">記録</span><span class="lang-en">Output</span></strong><br />
+              <span class="lang-ja">SD に記録</span>
+              <span class="lang-en">Data on SD</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">Arduino Uno</span>
+          <span class="tech-tag">C++</span>
+          <span class="tech-tag">DHT11</span>
+          <span class="tech-tag">DS18B20</span>
+          <span class="tech-tag">QS-FS01</span>
+          <span class="tech-tag">SD Card</span>
+        </div>
+      </article>
+
+      <!-- Secondary projects grid -->
+      <div class="cards">
+        <a class="card" href="https://github.com/liuyuanru123/CNN_-PyTorch-" target="_blank" rel="noopener">
+          <div class="card-head">🖼️ CNN Image Classification</div>
+          <p class="lang-ja">PyTorch による畳み込みニューラルネットワークの実装と学習。データ前処理から評価までのエンドツーエンドな ML パイプライン。</p>
+          <p class="lang-en">CNN implementation and training in PyTorch — full end-to-end ML pipeline from data preprocessing to evaluation.</p>
+          <div class="tags">Python · PyTorch</div>
+        </a>
+        <a class="card" href="https://github.com/liuyuanru123" target="_blank" rel="noopener">
+          <div class="card-head">📦 <span class="lang-ja">その他のリポジトリ</span><span class="lang-en">More on GitHub</span></div>
+          <p class="lang-ja">統計解析・データ可視化・学習用スクリプトなど、その他の小規模プロジェクト。</p>
+          <p class="lang-en">Statistical analysis, data visualization, and learning scripts — additional small-scale work.</p>
+          <div class="tags">github.com/liuyuanru123</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ====== Education ====== -->
+    <section id="education" class="section">
+      <h2><span class="lang-ja">🎓 学歴</span><span class="lang-en">🎓 Education</span></h2>
+      <ul class="timeline">
+        <li>
+          <div class="when">2023.10 – <span class="lang-ja">現在</span><span class="lang-en">Present</span></div>
+          <div class="what">
+            <strong><span class="lang-ja">修士課程</span><span class="lang-en">M.S.</span></strong>
+            <span class="lang-ja">， 九州大学大学院 生物資源環境科学府 数理モデリング学研究室</span>
+            <span class="lang-en">, Mathematical Modeling Lab, Graduate School of Bioresource and Bioenvironmental Sciences, Kyushu University</span><br />
+            <span class="subtle">
+              <span class="lang-ja">指導教員: </span><span class="lang-en">Advisor: </span>
+              Assoc. Prof. Ton Viet Ta
+            </span>
+          </div>
+        </li>
+        <li>
+          <div class="when">2022.10 – 2023.09</div>
+          <div class="what">
+            <strong><span class="lang-ja">研究生</span><span class="lang-en">Research Student</span></strong>
+            <span class="lang-ja">， 九州大学大学院 生物資源環境科学府 数理モデリング学研究室</span>
+            <span class="lang-en">, Mathematical Modeling Lab, Graduate School of Bioresource and Bioenvironmental Sciences, Kyushu University</span>
+          </div>
+        </li>
+        <li>
+          <div class="when">2015.09 – 2019.06</div>
+          <div class="what">
+            <strong><span class="lang-ja">学士 (理学)</span><span class="lang-en">B.S. in Science</span></strong>
+            <span class="lang-ja">， 長春大学 (中国) 理学部 応用統計学科</span>
+            <span class="lang-en">, Department of Applied Statistics, College of Science, Changchun University, China</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ====== Part-time Experience ====== -->
+    <section id="experience" class="section">
+      <h2><span class="lang-ja">🧑‍🏫 アルバイト経験</span><span class="lang-en">🧑‍🏫 Part-time Experience</span></h2>
+      <p class="section-lead">
+        <span class="lang-ja">教える経験を通じて、<strong>数学的基礎</strong>と教育・コミュニケーション能力を実践的に磨いてきました。理論的な深層学習研究の土台として、今後も重視している部分です。</span>
+        <span class="lang-en">Teaching has kept my <strong>mathematical foundations</strong> active while building pedagogy and communication — qualities I intend to draw on for theory-oriented deep-learning research.</span>
+      </p>
+      <ul class="timeline experience-list">
+        <li>
+          <div class="when">2022 – 2025</div>
+          <div class="what">
+            <strong>📐 <span class="lang-ja">微分方程式 講師（院試対策）</span><span class="lang-en">Differential Equations Instructor — Graduate-Entrance-Exam Prep</span></strong>
+            <span class="subtle">
+              <span class="lang-ja">／ 私塾</span>
+              <span class="lang-en">/ Cram school</span>
+            </span><br />
+            <span class="lang-ja">日本の大学院入試（院試）レベルの <strong>常微分方程式・偏微分方程式</strong> を担当。学部の標準カリキュラムを超える内容を体系的に説明する経験により、深層学習の理論研究で必要となる <strong>数学的基礎</strong>（解析学・線形代数を含む）を実践的に維持・強化。</span>
+            <span class="lang-en">Taught <strong>ordinary and partial differential equations</strong> at the level of Japanese <strong>graduate-school entrance exams (院試)</strong> — content well beyond standard undergraduate calculus. Systematically explaining this material kept the <strong>mathematical foundation</strong> (analysis and linear algebra included) needed for theory-oriented ML / DL research sharp and active.</span>
+          </div>
+        </li>
+        <li>
+          <div class="when">2022 – 2025</div>
+          <div class="what">
+            <strong>🗣️ <span class="lang-ja">TOEIC 講師</span><span class="lang-en">TOEIC Instructor</span></strong>
+            <span class="subtle">
+              <span class="lang-ja">／ 私塾</span>
+              <span class="lang-en">/ Cram school</span>
+            </span><br />
+            <span class="lang-ja">TOEIC 受験対策の指導を担当。語学運用力と教育・解説能力の両面を実践。（自身の TOEIC 805 取得経験を活かす。）</span>
+            <span class="lang-en">Taught TOEIC preparation — practical training in both language fluency and pedagogy. (Leveraging my own TOEIC 805 score.)</span>
+          </div>
+        </li>
+        <li>
+          <div class="when">2022 – 2025</div>
+          <div class="what">
+            <strong>🏪 <span class="lang-ja">セブン-イレブン</span><span class="lang-en">7-Eleven</span></strong>
+            <span class="subtle">
+              <span class="lang-ja">／ アルバイト</span>
+              <span class="lang-en">/ Part-time</span>
+            </span><br />
+            <span class="lang-ja">接客・日常業務を通じた日本語の実務経験。</span>
+            <span class="lang-en">Customer service in a Japanese-language work environment.</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ====== Skills ====== -->
+    <section id="skills" class="section">
+      <h2><span class="lang-ja">🛠️ スキル</span><span class="lang-en">🛠️ Skills</span></h2>
+      <p class="section-lead">
+        <span class="lang-ja"><strong>研究</strong>と<strong>エンジニアリング</strong>の両面にバランスよく取り組んでいます。</span>
+        <span class="lang-en">I work with intention across both <strong>research</strong> and <strong>engineering</strong>.</span>
+      </p>
+
+      <!-- ===== Group 1: Research / Academic ===== -->
+      <div class="skills-group">
+        <h3 class="skills-group-title">
+          <span class="lang-ja">🔬 研究・学術系</span>
+          <span class="lang-en">🔬 Research &amp; Academic</span>
+        </h3>
+        <div class="skills-grid">
+          <div class="skill-block">
+            <h4><span class="lang-ja">機械学習・深層学習</span><span class="lang-en">ML &amp; Deep Learning</span></h4>
+            <p>PyTorch · TensorFlow · Keras · scikit-learn</p>
+            <p class="muted">
+              <span class="lang-ja">マルチタスク学習 · 時系列モデル · CNN · GRU · Attention</span>
+              <span class="lang-en">Multi-task learning · time-series models · CNN · GRU · Attention</span>
+            </p>
+          </div>
+          <div class="skill-block">
+            <h4><span class="lang-ja">データ分析・統計</span><span class="lang-en">Data &amp; Statistics</span></h4>
+            <p>NumPy · Pandas · SciPy · statsmodels</p>
+            <p class="muted">
+              <span class="lang-ja">手法: 回帰分析・時系列分析・仮説検定・多変量解析・ベイズ統計</span>
+              <span class="lang-en">Methods: regression · time-series · hypothesis testing · multivariate · Bayesian</span>
+            </p>
+          </div>
+          <div class="skill-block">
+            <h4><span class="lang-ja">データ可視化</span><span class="lang-en">Visualization</span></h4>
+            <p>Matplotlib · Seaborn · Plotly · ggplot2 (R)</p>
+          </div>
+          <div class="skill-block">
+            <h4><span class="lang-ja">語学</span><span class="lang-en">Languages (Human)</span></h4>
+            <p>
+              <span class="lang-ja">中国語 (母語) · 日本語 (JLPT N2) · 英語 (TOEIC 805)</span>
+              <span class="lang-en">Chinese (Native) · Japanese (JLPT N2) · English (TOEIC 805)</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Group 2: Engineering / Development ===== -->
+      <div class="skills-group">
+        <h3 class="skills-group-title">
+          <span class="lang-ja">⚙️ エンジニアリング・開発系</span>
+          <span class="lang-en">⚙️ Engineering &amp; Development</span>
+        </h3>
+        <div class="skills-grid">
+          <div class="skill-block">
+            <h4><span class="lang-ja">プログラミング言語</span><span class="lang-en">Programming Languages</span></h4>
+            <p><strong>Python</strong> <span class="muted">(<span class="lang-ja">主力</span><span class="lang-en">primary</span>)</span> · <strong>R</strong> · C / C++ · JavaScript · SQL · HTML / CSS</p>
+          </div>
+          <div class="skill-block">
+            <h4><span class="lang-ja">☁️ クラウド・インフラ</span><span class="lang-en">☁️ Cloud &amp; Infrastructure</span></h4>
+            <p><strong>AWS</strong>: EC2 · RDS (MySQL) · CloudWatch · SNS · VPC</p>
+            <p><strong>JP Cloud</strong>: Sakura Rental Server</p>
+            <p class="muted">
+              <span class="lang-ja">Linux サーバー運用 · cron · 本番デプロイ · コスト最適化</span>
+              <span class="lang-en">Linux server administration · cron · production deployment · cost optimization</span>
+            </p>
+          </div>
+          <div class="skill-block">
+            <h4><span class="lang-ja">アプリ開発</span><span class="lang-en">Application Development</span></h4>
+            <p><strong>Web</strong>: Flask · REST API · HTML/CSS/JS</p>
+            <p><strong>Desktop</strong>: PyQt5</p>
+            <p class="muted">
+              <span class="lang-ja">フロント・バックエンドの両方を一貫して開発可能。</span>
+              <span class="lang-en">Comfortable end-to-end with both frontend and backend.</span>
+            </p>
+          </div>
+          <div class="skill-block">
+            <h4><span class="lang-ja">データベース・開発環境</span><span class="lang-en">Databases &amp; Tooling</span></h4>
+            <p><strong>DB</strong>: MySQL · SQLite</p>
+            <p><strong>Tools</strong>: Git · GitHub · Linux · Conda · Jupyter · VS Code</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== Contact ====== -->
+    <section id="contact" class="section">
+      <h2><span class="lang-ja">📫 連絡先</span><span class="lang-en">📫 Contact</span></h2>
+      <div class="contact-row">
+        <a class="contact-card" href="mailto:yuanruliu123@gmail.com">
+          <div class="contact-icon">📧</div>
+          <div class="contact-label"><span class="lang-ja">メール</span><span class="lang-en">Email</span></div>
+          <div class="contact-value">yuanruliu123@gmail.com</div>
+        </a>
+        <a class="contact-card" href="https://github.com/liuyuanru123" target="_blank" rel="noopener">
+          <div class="contact-icon">⌨</div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">liuyuanru123</div>
+        </a>
+        <a class="contact-card" href="https://liuyuanru123.github.io/">
+          <div class="contact-icon">🌐</div>
+          <div class="contact-label"><span class="lang-ja">サイト</span><span class="lang-en">Website</span></div>
+          <div class="contact-value">liuyuanru123.github.io</div>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        <span class="lang-ja">© 2026 劉 淵茹 (Yuanru Liu) — このサイトについて: HTML/CSS/JS による静的ページ。GitHub Pages 配信。</span>
+        <span class="lang-en">© 2026 Yuanru Liu — Built with plain HTML/CSS/JS, served via GitHub Pages.</span>
+      </p>
+    </footer>
+
+  </main>
+
+  <script src="assets/js/i18n.js"></script>
+</body>
+</html>
