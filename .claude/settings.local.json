@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "WebFetch(domain:www.ohtsuki.ics.keio.ac.jp)"
-    ]
-  }
-}
