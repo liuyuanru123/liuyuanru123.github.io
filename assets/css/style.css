@@ -368,6 +368,20 @@ main {
   color: var(--text-muted);
   font-size: 0.85rem;
 }
+.visitor-badge {
+  display: inline-block;
+  margin-top: 10px;
+  border: 0;
+  opacity: 0.65;
+  transition: opacity 200ms ease;
+}
+.visitor-badge:hover { opacity: 1; }
+.visitor-badge img {
+  width: 140px;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
 
 /* ===== Figures (research / model / flow diagrams) =====
    Three figures have very different aspect ratios:
