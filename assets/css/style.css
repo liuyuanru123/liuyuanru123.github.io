@@ -72,9 +72,9 @@ a:hover { border-bottom-color: var(--accent); }
   border-bottom: 1px solid var(--line);
 }
 .topbar-inner {
-  max-width: var(--max-w);
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 14px 28px;
   display: flex;
   align-items: center;
   gap: 18px;
@@ -124,43 +124,38 @@ a:hover { border-bottom-color: var(--accent); }
 }
 .nav a:hover { color: var(--accent); }
 
-.lang-toggle { flex-shrink: 0; }
-
-/* language toggle in top right */
+/* ===== Language toggle (single button — shows the OTHER language) ===== */
 .lang-toggle {
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.88rem;
-  padding: 6px 10px;
+  justify-content: center;
+  min-width: 72px;
+  height: 34px;
+  padding: 0 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--bg);
-}
-.lang-toggle button {
-  background: none;
-  border: 0;
-  padding: 2px 6px;
+  color: var(--text-soft);
   cursor: pointer;
-  color: var(--text-muted);
   font: inherit;
-  border-radius: 999px;
-  transition: color 120ms ease, background 120ms ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
 }
-.lang-toggle button[aria-pressed="true"] {
+.lang-toggle:hover {
   color: var(--accent);
+  border-color: var(--accent);
   background: var(--accent-soft);
-  font-weight: 600;
 }
-.lang-toggle button:hover { color: var(--accent); }
-.lang-sep { color: var(--line); }
 
 /* ===== Theme toggle (dark / light) =====
-   Single button with a ::before pseudo-element. Only one icon ever
-   exists — content is swapped via CSS based on the data-theme attr. */
+   Icon is set explicitly via theme.js textContent — only one
+   character ever exists in the button (no pseudo, no spans). */
 .theme-toggle {
   flex-shrink: 0;
-  margin-left: 6px;
+  margin-left: 4px;
   width: 34px;
   height: 34px;
   border: 1px solid var(--line);
@@ -176,14 +171,6 @@ a:hover { border-bottom-color: var(--accent); }
   padding: 0;
   line-height: 1;
   transition: color 160ms ease, background 160ms ease, border-color 160ms ease, transform 120ms ease;
-}
-.theme-toggle::before {
-  content: "☾";
-  line-height: 1;
-  display: inline-block;
-}
-:root[data-theme="dark"] .theme-toggle::before {
-  content: "☼";
 }
 .theme-toggle:hover {
   color: var(--accent);
