@@ -379,22 +379,34 @@
       <article class="featured-project featured-project--secondary">
         <header class="fp-head">
           <div>
-            <h3>🌬️ <span class="lang-ja">自然換気を促す IoT 換気量推定システム</span><span class="lang-en">IoT-based Natural Ventilation Advisor</span></h3>
+            <h3>🌬️ <span class="lang-ja">BreathFlow — 自然換気を促す Edge-AI 行動誘導システム</span><span class="lang-en">BreathFlow — Edge-AI Driven Behavioural Nudging for Natural Ventilation</span></h3>
             <p class="fp-sub">
-              <span class="lang-ja">窓の開度 × 風速 × 室内環境から換気量を推定し、PMV 快適性を満たす自然換気をスマホで提案</span>
-              <span class="lang-en">Estimates ventilation rate from window aperture, wind speed and IEQ, then nudges natural ventilation that satisfies PMV comfort</span>
+              <span class="lang-ja">窓を開けるべき瞬間を IoT と Edge-AI が見抜き、住人にそっと伝える研究</span>
+              <span class="lang-en">An IoT × edge-AI system that learns when a window beats an air conditioner — and nudges the resident at that exact moment.</span>
             </p>
           </div>
           <span class="status-pill status-pill--alt">
-            <span class="lang-ja">Hardware × IoT</span>
-            <span class="lang-en">Hardware × IoT</span>
+            <span class="lang-ja">Hardware × IoT × ML</span>
+            <span class="lang-en">Hardware × IoT × ML</span>
           </span>
         </header>
         <p class="fp-desc">
-          <span class="lang-ja"><strong>ハードウェア × IoT × 機械学習</strong>の練習プロジェクト。<strong>2 つの自作センサーモジュール</strong>（①窓の開度を測る超音波モジュール、②風速・室内外温湿度・CO2・PM・MRT を測る環境モジュール）を組み合わせて室内の<strong>換気量 (ACH)</strong> を推定。LSTM ベースの需要モデルが <strong>PMV を満たす最適換気量</strong>を計算し、外気質と熱環境が良いときは「窓を半開で 10 分」のような<strong>具体的なナッジ</strong>をスマホアプリへ配信、空調に頼らない快適性を行動から実現する。</span>
-          <span class="lang-en">A <strong>hardware × IoT × machine-learning</strong> practice project. <strong>Two self-built sensor modules</strong> work together: ① an ultrasonic module that measures window aperture, ② an environment module capturing wind speed, indoor/outdoor T/RH, CO2, PM and MRT. Their fused signals feed an LSTM demand model that infers the <strong>air-change rate (ACH)</strong> needed to satisfy PMV comfort. When outdoor air and thermal conditions are favourable, a mobile app sends a <strong>concrete, time-bound nudge</strong> (e.g. "half-open for 10 min") — reducing AC dependence through behavioural design rather than automation.</span>
+          <span class="lang-ja">現代の住宅快適性は<strong>常時稼働する空調</strong>に依存し、エネルギーを浪費するうえ住人を判断ループから外している。本プロジェクトは「<strong>窓</strong>」を一級のアクチュエータとして再定義する。<strong>2 つの自作 IoT モジュール</strong>（①窓開度を測る超音波モジュール、②風速・T/RH・CO2・PM・MRT を測る環境モジュール）でセンシングし、<strong>エッジで動く LSTM</strong> が自然換気の換気量 (ACH) と快適性軌跡 (PMV / 適応モデル) を予測。窓が空調より優位な瞬間に限り、文脈依存のモバイルアプリが「窓を半開で 10 分、PM2.5 が約 20% 減少」のような<strong>具体的で時限つきのナッジ</strong>を配信する。実測フィードバックで世帯ごとに適応モデルを更新する <strong>Human-in-the-loop CPS</strong>。</span>
+          <span class="lang-en">Modern indoor comfort is dominated by <strong>always-on HVAC</strong> — energy-hungry and removing the resident from the loop. <em>BreathFlow</em> re-introduces the human decision by treating the <strong>window</strong> as a first-class actuator. <strong>Two custom IoT modules</strong> (① ultrasonic window-aperture sensor, ② wind / T-RH / CO2 / PM / MRT stack) feed an <strong>on-device LSTM</strong> that infers achievable air-change rate and forecasts comfort trajectory (PMV / adaptive). When opening the window will outperform the AC, a context-aware mobile companion delivers a <strong>concrete, time-bound nudge</strong> ("half-open for 10 min, PM2.5 will drop ~20%"). Real-time feedback closes the loop into a <strong>human-in-the-loop CPS</strong>.</span>
         </p>
-        <div class="salt-gallery">
+
+        <!-- Hero: full-width system flowchart -->
+        <figure class="figure" style="margin: 20px 0 18px;">
+          <a href="Image/Ventilation/BreathFlow_flowchart.png" target="_blank" rel="noopener">
+            <img src="Image/Ventilation/BreathFlow_flowchart.png" alt="BreathFlow 7-layer system flowchart — IoT sensing, state estimation, multi-criteria decision, LSTM demand, intervention, user, adaptation loop" loading="lazy" style="width: 100%; border-radius: 8px; border: 1px solid var(--line); background: var(--bg-soft);" />
+          </a>
+          <figcaption>
+            <span class="lang-ja"><strong>システム全体フロー</strong> — IoT センシングから多基準判断、LSTM 需要モデル、モバイルナッジ、ユーザー行動、適応モデル更新までを閉ループで設計。</span>
+            <span class="lang-en"><strong>System flowchart</strong> — closed-loop pipeline from IoT sensing through multi-criteria decision, LSTM demand model, mobile nudge, user action, and per-household model adaptation.</span>
+          </figcaption>
+        </figure>
+        <!-- Supporting images: hardware + sensing architecture -->
+        <div class="salt-gallery" style="grid-template-columns: repeat(3, 1fr);">
           <figure class="salt-figure">
             <a href="Image/Ventilation/device2.jpg" target="_blank" rel="noopener">
               <img src="Image/Ventilation/device2.jpg" alt="Window aperture sensor module mounted on window frame" loading="lazy" />
@@ -407,7 +419,7 @@
           </figure>
           <figure class="salt-figure">
             <a href="Image/Ventilation/Device.png" target="_blank" rel="noopener">
-              <img src="Image/Ventilation/Device.png" alt="Window-status module and ventilation condition module assembled on the windowsill" loading="lazy" />
+              <img src="Image/Ventilation/Device.png" alt="Window-status module and IEQ sensor stack assembled on the windowsill" loading="lazy" />
             </a>
             <figcaption>
               <strong>② <span class="lang-ja">環境センサ群</span><span class="lang-en">Environment Stack</span></strong><br />
@@ -416,35 +428,29 @@
             </figcaption>
           </figure>
           <figure class="salt-figure">
-            <a href="Image/Ventilation/BreathFlow_flowchart.png" target="_blank" rel="noopener">
-              <img src="Image/Ventilation/BreathFlow_flowchart.png" alt="System flowchart: IoT sensing, decision, LSTM demand model, feedback, ventilation choice" loading="lazy" />
-            </a>
-            <figcaption>
-              <strong>③ <span class="lang-ja">システムフロー</span><span class="lang-en">System Flow</span></strong><br />
-              <span class="lang-ja">換気判断とフィードバック</span>
-              <span class="lang-en">Decision + feedback loop</span>
-            </figcaption>
-          </figure>
-          <figure class="salt-figure">
             <a href="Image/Ventilation/SensingArchitecture.png" target="_blank" rel="noopener">
-              <img src="Image/Ventilation/SensingArchitecture.png" alt="Dual-module sensing architecture combining physics-based and LSTM ACH estimators" loading="lazy" />
+              <img src="Image/Ventilation/SensingArchitecture.png" alt="Sensing and estimation architecture: physics-based estimator with LSTM residual fusion" loading="lazy" />
             </a>
             <figcaption>
-              <strong>④ <span class="lang-ja">推定アーキテクチャ</span><span class="lang-en">Estimation</span></strong><br />
-              <span class="lang-ja">物理式 + LSTM で ACH 推定</span>
-              <span class="lang-en">Physics + LSTM → ACH</span>
+              <strong>③ <span class="lang-ja">推定アーキテクチャ</span><span class="lang-en">Estimation</span></strong><br />
+              <span class="lang-ja">物理式 + LSTM 残差融合で ACH 推定</span>
+              <span class="lang-en">Physics + LSTM residual → ACH</span>
             </figcaption>
           </figure>
         </div>
+
         <div class="tech-tags">
-          <span class="tech-tag">Arduino</span>
-          <span class="tech-tag">Ultrasonic Sensor</span>
+          <span class="tech-tag">Edge AI</span>
+          <span class="tech-tag">IoT</span>
+          <span class="tech-tag">Arduino / ESP32</span>
+          <span class="tech-tag">Ultrasonic + Anemometer</span>
           <span class="tech-tag">CO2 / PM / T-RH / MRT</span>
-          <span class="tech-tag">Anemometer</span>
-          <span class="tech-tag">LSTM</span>
-          <span class="tech-tag">PMV / Adaptive Comfort</span>
-          <span class="tech-tag">iOS App</span>
+          <span class="tech-tag">LSTM (PyTorch)</span>
+          <span class="tech-tag">TF Lite Micro</span>
+          <span class="tech-tag">Swift / iOS</span>
+          <span class="tech-tag">PMV + Adaptive Comfort</span>
           <span class="tech-tag tech-tag--alt">EnergyPlus baseline</span>
+          <span class="tech-tag tech-tag--alt">Tracer-gas calibration</span>
         </div>
       </article>
 
