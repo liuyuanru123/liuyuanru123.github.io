@@ -101,20 +101,19 @@
     <div class="block">
       <div class="title"><span class="lbl">(c)</span>Signals from Module A</div>
       <div class="item">·  Aperture area  $A(t)$  [m²]</div>
-      <div class="item">·  Effective opening height  $H_{\mathrm{eff}}$</div>
+      <div class="item">·  Effective opening height  $H_{\mathrm{eff}}$  [m]</div>
       <div class="item">·  Open / closed binary state</div>
-      <div class="item">·  Opening duration  $\Delta t_{\mathrm{open}}$</div>
-      <div class="sampling">sampling: 1 Hz, on-device</div>
+      <div class="sampling">sampling: 1 Hz, edge device (ESP32 / RPi)</div>
     </div>
     <div class="block">
       <div class="title"><span class="lbl">(d)</span>Signals from Module B</div>
       <div class="item">·  Wind speed  $v(t)$  [m/s]</div>
-      <div class="item">·  Indoor T, Outdoor T  →  $\Delta T$</div>
+      <div class="item">·  Indoor &amp; outdoor T  →  $\Delta T$,  $\overline{T}$ [K]</div>
       <div class="item">·  Globe temperature  →  $\overline{T}_{\mathrm{r}}$ (MRT)</div>
       <div class="item">·  RH (in / out),  CO₂ ppm</div>
       <div class="item">·  PM2.5, PM10 (in / out)</div>
-      <div class="item">·  CO₂ decay slope (tracer)</div>
-      <div class="sampling">sampling: 1 Hz, edge MCU</div>
+      <div class="item">·  CO₂ decay slope <span style="font-style:italic;color:var(--text-soft)">(calibration only)</span></div>
+      <div class="sampling">sampling: 1 Hz, edge device (ESP32 / RPi)</div>
     </div>
   </div>
 
@@ -126,16 +125,16 @@
 
   <!-- Tier 3: Physics -->
   <div class="block compute">
-    <div class="title"><span class="lbl">(e)</span>Physics-based estimator</div>
+    <div class="title"><span class="lbl">(e)</span>Physics-based estimator (ASHRAE / BS 5925)</div>
     <div class="fgrid">
       <div class="flabel">Buoyancy-driven (stack):</div>
-      <div>$\displaystyle Q_{b} \;=\; C_{d}\, A(t)\, \sqrt{\frac{2\,g\,\Delta T\,H}{T}}$</div>
+      <div>$\displaystyle Q_{b} \;=\; C_{d}\, A(t)\, \sqrt{\frac{2\,g\,\Delta T\, H_{\mathrm{eff}}}{\overline{T}}}$</div>
       <div class="flabel">Wind-driven (cross):</div>
       <div>$\displaystyle Q_{w} \;=\; C_{w}\, A(t)\, v(t)$</div>
       <div class="flabel">Combined:</div>
-      <div>$\displaystyle Q_{\mathrm{phys}} \;=\; \sqrt{\, Q_{b}^{2} + Q_{w}^{2}\,}$</div>
+      <div>$\displaystyle Q_{\mathrm{phys}} \;=\; \sqrt{\, Q_{b}^{2} + Q_{w}^{2}\,}$&nbsp;&nbsp;[m³/s]</div>
     </div>
-    <div class="calib">calibrated by CO₂-decay ground truth</div>
+    <div class="calib">$C_{w}$ lumps the inlet–outlet pressure-coefficient term $\sqrt{\Delta C_{p}}$</div>
   </div>
 
   <div class="arr"><svg width="100%" height="22" viewBox="0 0 680 22" preserveAspectRatio="none">
@@ -147,9 +146,10 @@
   <div class="block compute">
     <div class="title"><span class="lbl">(f)</span>LSTM fusion — residual + temporal</div>
     <div class="item">Input window: last 10 min  ·  Target: ACH&nbsp;[h⁻¹]</div>
-    <div class="lstm-feat">Feature vector $\mathbf{x}_{t} \;=\; \bigl[\, A,\; v,\; \Delta T,\; \mathrm{RH},\; \mathrm{CO}_{2},\; \mathrm{slope},\; Q_{\mathrm{phys}} \,\bigr]$</div>
-    <div class="lstm-main">$\displaystyle \widehat{\mathrm{ACH}} \;=\; Q_{\mathrm{phys}} \;+\; \mathrm{LSTM}_{\boldsymbol{\theta}}\!\left(\mathbf{x}_{t-N:t}\right)$</div>
-    <div class="calib">calibrated by CO₂-decay ground truth</div>
+    <div class="lstm-feat">Physics → ACH conversion: $\;\mathrm{ACH}_{\mathrm{phys}}(t) = 3600\, Q_{\mathrm{phys}}(t)\, /\, V_{\mathrm{room}}$&nbsp;&nbsp;[h⁻¹]</div>
+    <div class="lstm-feat">Feature vector $\mathbf{x}_{t} \;=\; \bigl[\, A,\; v,\; \Delta T,\; \mathrm{RH},\; \mathrm{CO}_{2},\; \mathrm{ACH}_{\mathrm{phys}} \,\bigr]$</div>
+    <div class="lstm-main">$\displaystyle \widehat{\mathrm{ACH}}(t) \;=\; \mathrm{ACH}_{\mathrm{phys}}(t) \;+\; \mathrm{LSTM}_{\boldsymbol{\theta}}\!\left(\mathbf{x}_{t-N:t}\right)$</div>
+    <div class="calib">$\{C_{d}, C_{w}, \boldsymbol{\theta}\}$ jointly calibrated against CO₂ tracer-decay ground truth (ISO 12569)</div>
   </div>
 
   <div class="arr"><svg width="100%" height="22" viewBox="0 0 680 22" preserveAspectRatio="none">
@@ -162,12 +162,13 @@
     <div class="title"><span class="lbl">(g)</span>Output to BreathFlow Layer 2</div>
     <div class="out-grid">
       <span>Estimated ACH:</span><span>$\widehat{\mathrm{ACH}}(t)\;\;[\mathrm{h}^{-1}]$</span>
-      <span>Confidence:</span><span>$\sigma$ &nbsp;from LSTM dropout ensemble</span>
-      <span>Feeds:</span><span>→ PMV / adaptive comfort predictor &nbsp;·&nbsp; decision layer (open / hybrid / AC)</span>
+      <span>Confidence:</span><span>$\sigma$ from MC-dropout ensemble (epistemic uncertainty)</span>
+      <span>Feeds decision:</span><span>→ open / hybrid / AC selection (compared against AC's projected ACH equivalent)</span>
+      <span>Parallel path:</span><span>$T,\,\overline{T}_{\mathrm{r}},\,v,\,\mathrm{RH}$ from (d) → PMV / adaptive comfort predictor (ASHRAE 55 / EN 16798)</span>
     </div>
   </div>
 
-  <div class="caption"><span class="num">Fig. 1.</span> <span class="desc">End-to-end pipeline from window-aperture and IEQ sensing to data-fused ACH estimation.</span></div>
+  <div class="caption"><span class="num">Fig. 1.</span> <span class="desc">Proposed end-to-end pipeline from window-aperture and IEQ sensing to data-fused ACH estimation; physics-informed residual learning calibrated against tracer-gas ground truth.</span></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
