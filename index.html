@@ -349,8 +349,8 @@
             <span class="lang-en">☁️ Production Deployment on AWS</span>
           </h4>
           <p class="fp-deployment-desc">
-            <span class="lang-ja">研究を<strong>論文だけで終わらせず</strong>、<strong>本番想定のクラウドシステム</strong>として実装。Amazon EC2 上で <strong>①Flask API → ②cron スケジューラ → ③Weather Data Fetcher → ④RainNet-MT 推論モデル → ⑤通知判断</strong> の 5 段階パイプラインを稼働、Amazon RDS (MySQL) に予測結果を保存。<strong>IoT センサー（雨量・水位・土壌）</strong>からのリアルタイム観測と外部 Weather API (JMA / OpenWeather) の双方を入力に統合し、Amazon SNS を経由して降雨通知を自前の <strong>Web / Desktop アプリ</strong>へ配信、CloudWatch で全プロセスをロギング。コスト最適化のため、後に<strong>さくらのレンタルサーバ</strong>へ一部を移行する判断も自ら実施。</span>
-            <span class="lang-en">Took the research <strong>beyond a paper</strong> and implemented a <strong>production-style cloud system</strong>. Amazon EC2 hosts a 5-stage pipeline: <strong>①Flask API → ②cron scheduler → ③Weather Data Fetcher → ④RainNet-MT inference → ⑤Notification Judgement</strong>; predictions persist to Amazon RDS (MySQL). <strong>IoT sensors (rainfall, water-level, soil)</strong> stream real-time observations alongside external Weather APIs (JMA / OpenWeather); Amazon SNS publishes rainfall alerts to my own <strong>Web / Desktop applications</strong>; CloudWatch logs every stage. Later migrated parts of the stack to <strong>Sakura Rental Server</strong> for cost optimization.</span>
+            <span class="lang-ja">研究を<strong>論文だけで終わらせず</strong>、<strong>本番想定のクラウドシステム</strong>として実装。Amazon EC2 上で <strong>①Flask API → ②cron スケジューラ → ③Weather Data Fetcher → ④RainNet-MT 推論モデル → ⑤通知判断</strong> の 5 段階パイプラインを稼働、Amazon RDS (MySQL) に予測結果を保存。<strong>Raspberry Pi ベースの IoT センサークラスター（温湿度・風速・照度）</strong>からのリアルタイム観測と外部 Weather API (JMA / OpenWeather) の双方を入力に統合し、Amazon SNS を経由して降雨通知を自前の <strong>Web / Desktop アプリ</strong>へ配信、CloudWatch で全プロセスをロギング。コスト最適化のため、後に<strong>さくらのレンタルサーバ</strong>へ一部を移行する判断も自ら実施。</span>
+            <span class="lang-en">Took the research <strong>beyond a paper</strong> and implemented a <strong>production-style cloud system</strong>. Amazon EC2 hosts a 5-stage pipeline: <strong>①Flask API → ②cron scheduler → ③Weather Data Fetcher → ④RainNet-MT inference → ⑤Notification Judgement</strong>; predictions persist to Amazon RDS (MySQL). A <strong>Raspberry Pi-based IoT sensor cluster (T/RH, wind speed, illuminance)</strong> streams real-time observations alongside external Weather APIs (JMA / OpenWeather); Amazon SNS publishes rainfall alerts to my own <strong>Web / Desktop applications</strong>; CloudWatch logs every stage. Later migrated parts of the stack to <strong>Sakura Rental Server</strong> for cost optimization.</span>
           </p>
           <figure class="figure fp-deployment-figure">
             <a href="Image/aws_deployment.svg" target="_blank" rel="noopener">
@@ -379,20 +379,20 @@
       <article class="featured-project featured-project--secondary">
         <header class="fp-head">
           <div>
-            <h3>🌬️ <span class="lang-ja">BreathFlow — 自然換気を促す Edge-AI 行動誘導システム</span><span class="lang-en">BreathFlow — Edge-AI Driven Behavioural Nudging for Natural Ventilation</span></h3>
+            <h3>🌬️ <span class="lang-ja">BreathFlow — 自然換気のための IoT センシング試作</span><span class="lang-en">BreathFlow — IoT Sensing Prototype for Natural Ventilation</span></h3>
             <p class="fp-sub">
-              <span class="lang-ja">窓を開けるべき瞬間を IoT と Edge-AI が見抜き、住人にそっと伝える研究</span>
-              <span class="lang-en">An IoT × edge-AI system that learns when a window beats an air conditioner — and nudges the resident at that exact moment.</span>
+              <span class="lang-ja">窓まわりの IoT センシングを自作・データ収集中。Edge-AI による行動誘導は今後の構想（現在は中断中）。</span>
+              <span class="lang-en">Window-side IoT sensing built and collecting data; the edge-AI nudging layer is a planned next step (currently on hold).</span>
             </p>
           </div>
           <span class="status-pill status-pill--alt">
-            <span class="lang-ja">Hardware × IoT × ML</span>
-            <span class="lang-en">Hardware × IoT × ML</span>
+            <span class="lang-ja">試作中</span>
+            <span class="lang-en">Prototype</span>
           </span>
         </header>
         <p class="fp-desc">
-          <span class="lang-ja">現代の住宅快適性は<strong>常時稼働する空調</strong>に依存し、エネルギーを浪費するうえ住人を判断ループから外している。本プロジェクトは「<strong>窓</strong>」を一級のアクチュエータとして再定義する。<strong>2 つの自作 IoT モジュール</strong>（①窓開度を測る超音波モジュール、②風速・T/RH・CO2・PM・MRT を測る環境モジュール）でセンシングし、<strong>エッジで動く LSTM</strong> が自然換気の換気量 (ACH) と快適性軌跡 (PMV / 適応モデル) を予測。窓が空調より優位な瞬間に限り、文脈依存のモバイルアプリが「窓を半開で 10 分、PM2.5 が約 20% 減少」のような<strong>具体的で時限つきのナッジ</strong>を配信する。実測フィードバックで世帯ごとに適応モデルを更新する <strong>Human-in-the-loop CPS</strong>。</span>
-          <span class="lang-en">Modern indoor comfort is dominated by <strong>always-on HVAC</strong> — energy-hungry and removing the resident from the loop. <em>BreathFlow</em> re-introduces the human decision by treating the <strong>window</strong> as a first-class actuator. <strong>Two custom IoT modules</strong> (① ultrasonic window-aperture sensor, ② wind / T-RH / CO2 / PM / MRT stack) feed an <strong>on-device LSTM</strong> that infers achievable air-change rate and forecasts comfort trajectory (PMV / adaptive). When opening the window will outperform the AC, a context-aware mobile companion delivers a <strong>concrete, time-bound nudge</strong> ("half-open for 10 min, PM2.5 will drop ~20%"). Real-time feedback closes the loop into a <strong>human-in-the-loop CPS</strong>.</span>
+          <span class="lang-ja">現代の住宅快適性は<strong>常時稼働する空調</strong>に依存し、エネルギーを浪費するうえ住人を判断ループから外している。本プロジェクトは「<strong>窓</strong>」を一級のアクチュエータとして捉え直す試み。<strong>現段階</strong>では <strong>Arduino ベースの 2 つの自作 IoT モジュール</strong>（①窓開度を測る超音波モジュール、②風速・T/RH・CO2・PM・MRT の環境モジュール）を製作し、センシングとデータ収集を進めている。<strong>今後</strong>は ESP32 へ移植し <strong>TinyML で LSTM をオンデバイス実行</strong>、自然換気の換気量 (ACH) と快適性軌跡 (PMV / 適応モデル) を予測したうえで、窓が空調より優位な瞬間に「窓を半開で 10 分」のような<strong>具体的で時限つきのナッジ</strong>をモバイルアプリから配信する <strong>Human-in-the-loop CPS</strong> へ拡張する計画。</span>
+          <span class="lang-en">Modern indoor comfort is dominated by <strong>always-on HVAC</strong> — energy-hungry and removing the resident from the loop. <em>BreathFlow</em> reframes the <strong>window</strong> as a first-class actuator. <strong>Current stage:</strong> two custom <strong>Arduino-based IoT modules</strong> (① ultrasonic window-aperture sensor, ② wind / T-RH / CO2 / PM / MRT stack) — sensing hardware built, data collection in progress. <strong>Planned next:</strong> port to <strong>ESP32 and run an on-device LSTM (TinyML)</strong> that infers achievable air-change rate and forecasts comfort trajectory (PMV / adaptive); a context-aware mobile companion would then deliver a <strong>concrete, time-bound nudge</strong> ("half-open for 10 min") when the window beats the AC, closing the loop into a <strong>human-in-the-loop CPS</strong>.</span>
         </p>
 
         <!-- Hero: full-width system flowchart -->
@@ -418,8 +418,8 @@
             </figcaption>
           </figure>
           <figure class="salt-figure">
-            <a href="Image/Ventilation/Device.png" target="_blank" rel="noopener">
-              <img src="Image/Ventilation/Device.png" alt="Window-status module and IEQ sensor stack assembled on the windowsill" loading="lazy" />
+            <a href="Image/Ventilation/Device.jpg" target="_blank" rel="noopener">
+              <img src="Image/Ventilation/Device.jpg" alt="Window-status module and IEQ sensor stack assembled on the windowsill" loading="lazy" />
             </a>
             <figcaption>
               <strong>② <span class="lang-ja">環境センサ群</span><span class="lang-en">Environment Stack</span></strong><br />
@@ -429,28 +429,21 @@
           </figure>
           <figure class="salt-figure">
             <a href="Image/Ventilation/SensingArchitecture.png" target="_blank" rel="noopener">
-              <img src="Image/Ventilation/SensingArchitecture.png" alt="Sensing and estimation architecture: physics-based estimator with LSTM residual fusion" loading="lazy" />
+              <img src="Image/Ventilation/SensingArchitecture.png" alt="Dual-module sensing architecture: window aperture sensor and IEQ stack feeding a physics-based estimator and LSTM residual fusion to ACH" loading="lazy" style="background: #fff;" />
             </a>
             <figcaption>
               <strong>③ <span class="lang-ja">推定アーキテクチャ</span><span class="lang-en">Estimation</span></strong><br />
-              <span class="lang-ja">物理式 + LSTM 残差融合で ACH 推定</span>
-              <span class="lang-en">Physics + LSTM residual → ACH</span>
+              <span class="lang-ja">物理式 + LSTM 残差融合で ACH 推定（提案）</span>
+              <span class="lang-en">Physics + LSTM residual → ACH (proposed)</span>
             </figcaption>
           </figure>
         </div>
 
         <div class="tech-tags">
-          <span class="tech-tag">Edge AI</span>
-          <span class="tech-tag">IoT</span>
-          <span class="tech-tag">Arduino / ESP32</span>
-          <span class="tech-tag">Ultrasonic + Anemometer</span>
-          <span class="tech-tag">CO2 / PM / T-RH / MRT</span>
-          <span class="tech-tag">LSTM (PyTorch)</span>
-          <span class="tech-tag">TF Lite Micro</span>
-          <span class="tech-tag">Swift / iOS</span>
-          <span class="tech-tag">PMV + Adaptive Comfort</span>
-          <span class="tech-tag tech-tag--alt">EnergyPlus baseline</span>
-          <span class="tech-tag tech-tag--alt">Tracer-gas calibration</span>
+          <span class="tech-tag"><span class="lang-ja">エッジ AI</span><span class="lang-en">Edge AI</span></span>
+          <span class="tech-tag"><span class="lang-ja">コンテキスト認識 HCI</span><span class="lang-en">Context-aware HCI</span></span>
+          <span class="tech-tag"><span class="lang-ja">行動変容</span><span class="lang-en">Behaviour change</span></span>
+          <span class="tech-tag"><span class="lang-ja">住宅サステナビリティ</span><span class="lang-en">Residential sustainability</span></span>
         </div>
       </article>
 

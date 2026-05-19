@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BreathFlow — Dual-Module Sensing Architecture</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+  :root {
+    --bg: transparent;
+    --bg-soft: #f5f6f8;
+    --text: #1a1a1a;
+    --text-soft: #5b6470;
+    --line: #1a1a1a;
+    --serif: "Source Serif 4", Georgia, "Hiragino Mincho ProN", serif;
+    --sans: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
+  }
+  [data-theme="dark"] {
+    --bg-soft: #172033;
+    --text: #e5e8ee;
+    --text-soft: #a4adbd;
+    --line: #e5e8ee;
+  }
+  html, body { margin: 0; padding: 0; background: transparent; }
+  body { font-family: var(--sans); color: var(--text); }
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .fig{max-width:680px;margin:0 auto;padding:6px 12px}
+  .fig-title{font-family:var(--serif);font-size:15px;text-align:center;margin:0;font-weight:500;line-height:1.4}
+  .fig-sub{font-size:12px;color:var(--text-soft);text-align:center;margin:4px 0 14px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .block{border:0.75px solid var(--line);padding:12px 14px;background:var(--bg);box-sizing:border-box;border-radius:4px}
+  .block.compute{background:var(--bg-soft)}
+  .block.output{border-width:1.25px}
+  .block .title{font-size:14px;font-weight:500;margin:0 0 6px}
+  .block.compute .title,.block.output .title{text-align:center;margin-bottom:10px}
+  .lbl{font-family:var(--serif);font-style:italic;margin-right:4px}
+  .item{font-size:12px;line-height:1.85}
+  .sampling{font-size:11px;font-style:italic;color:var(--text-soft);margin:8px 0 0}
+  .calib{font-size:11px;font-style:italic;color:var(--text-soft);text-align:center;margin:8px 0 0}
+  .fgrid{display:grid;grid-template-columns:200px 1fr;align-items:center;row-gap:2px;column-gap:8px}
+  .flabel{font-size:12px}
+  .lstm-feat{font-size:13px;margin:2px 0}
+  .lstm-main{font-size:15px;text-align:center;margin:6px 0 4px}
+  .out-grid{display:grid;grid-template-columns:120px 1fr;gap:4px 12px;font-size:13px;align-items:center}
+  .caption{font-family:var(--serif);font-size:12px;text-align:center;margin:14px 0 6px}
+  .caption .num{font-weight:500}
+  .caption .desc{font-style:italic}
+  .arr svg{display:block;color:var(--line)}
+  .katex{font-size:1em !important}
+  @media (max-width: 600px) {
+    .row { grid-template-columns: 1fr; }
+    .fgrid { grid-template-columns: 1fr; }
+    .out-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<script>
+  (function () {
+    function applyTheme() {
+      try {
+        var t = localStorage.getItem('yl-theme');
+        var dark = t === 'dark' || (t === null && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      } catch (e) {}
+    }
+    applyTheme();
+    window.addEventListener('storage', applyTheme);
+  })();
+</script>
+
+<h2 class="sr-only">Dual-module sensing architecture for ventilation estimation, showing five tiers from hardware sensors through physics estimator and LSTM fusion to ACH output.</h2>
+
+<div class="fig">
+  <div class="fig-title">Dual-module sensing architecture for ventilation volume estimation</div>
+  <div class="fig-sub">BreathFlow — Layer 1 + Layer 2 (proposed)</div>
+
+  <!-- Tier 1: Hardware -->
+  <div class="row">
+    <div class="block">
+      <div class="title"><span class="lbl">(a)</span>Module A</div>
+      <div class="item">Window aperture sensor</div>
+      <div class="item">ultrasonic + magnetic reed</div>
+    </div>
+    <div class="block">
+      <div class="title"><span class="lbl">(b)</span>Module B</div>
+      <div class="item">Ventilation &amp; IEQ sensor stack</div>
+      <div class="item">anemometer + CO₂ / PM / T / RH / MRT</div>
+    </div>
+  </div>
+
+  <div class="arr"><svg width="100%" height="22" viewBox="0 0 680 22" preserveAspectRatio="none">
+    <line x1="166" y1="0" x2="166" y2="18" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+    <path d="M 162 14 L 166 20 L 170 14" fill="none" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="514" y1="0" x2="514" y2="18" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+    <path d="M 510 14 L 514 20 L 518 14" fill="none" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+
+  <!-- Tier 2: Signals -->
+  <div class="row">
+    <div class="block">
+      <div class="title"><span class="lbl">(c)</span>Signals from Module A</div>
+      <div class="item">·  Aperture area  $A(t)$  [m²]</div>
+      <div class="item">·  Effective opening height  $H_{\mathrm{eff}}$</div>
+      <div class="item">·  Open / closed binary state</div>
+      <div class="item">·  Opening duration  $\Delta t_{\mathrm{open}}$</div>
+      <div class="sampling">sampling: 1 Hz, on-device</div>
+    </div>
+    <div class="block">
+      <div class="title"><span class="lbl">(d)</span>Signals from Module B</div>
+      <div class="item">·  Wind speed  $v(t)$  [m/s]</div>
+      <div class="item">·  Indoor T, Outdoor T  →  $\Delta T$</div>
+      <div class="item">·  Globe temperature  →  $\overline{T}_{\mathrm{r}}$ (MRT)</div>
+      <div class="item">·  RH (in / out),  CO₂ ppm</div>
+      <div class="item">·  PM2.5, PM10 (in / out)</div>
+      <div class="item">·  CO₂ decay slope (tracer)</div>
+      <div class="sampling">sampling: 1 Hz, edge MCU</div>
+    </div>
+  </div>
+
+  <div class="arr"><svg width="100%" height="32" viewBox="0 0 680 32" preserveAspectRatio="none">
+    <path d="M 166 0 L 166 16 L 514 16 L 514 0" fill="none" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+    <line x1="340" y1="16" x2="340" y2="28" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+    <path d="M 336 24 L 340 30 L 344 24" fill="none" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+
+  <!-- Tier 3: Physics -->
+  <div class="block compute">
+    <div class="title"><span class="lbl">(e)</span>Physics-based estimator</div>
+    <div class="fgrid">
+      <div class="flabel">Buoyancy-driven (stack):</div>
+      <div>$\displaystyle Q_{b} \;=\; C_{d}\, A(t)\, \sqrt{\frac{2\,g\,\Delta T\,H}{T}}$</div>
+      <div class="flabel">Wind-driven (cross):</div>
+      <div>$\displaystyle Q_{w} \;=\; C_{w}\, A(t)\, v(t)$</div>
+      <div class="flabel">Combined:</div>
+      <div>$\displaystyle Q_{\mathrm{phys}} \;=\; \sqrt{\, Q_{b}^{2} + Q_{w}^{2}\,}$</div>
+    </div>
+    <div class="calib">calibrated by CO₂-decay ground truth</div>
+  </div>
+
+  <div class="arr"><svg width="100%" height="22" viewBox="0 0 680 22" preserveAspectRatio="none">
+    <line x1="340" y1="0" x2="340" y2="18" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+    <path d="M 336 14 L 340 20 L 344 14" fill="none" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+
+  <!-- Tier 4: LSTM -->
+  <div class="block compute">
+    <div class="title"><span class="lbl">(f)</span>LSTM fusion — residual + temporal</div>
+    <div class="item">Input window: last 10 min  ·  Target: ACH&nbsp;[h⁻¹]</div>
+    <div class="lstm-feat">Feature vector $\mathbf{x}_{t} \;=\; \bigl[\, A,\; v,\; \Delta T,\; \mathrm{RH},\; \mathrm{CO}_{2},\; \mathrm{slope},\; Q_{\mathrm{phys}} \,\bigr]$</div>
+    <div class="lstm-main">$\displaystyle \widehat{\mathrm{ACH}} \;=\; Q_{\mathrm{phys}} \;+\; \mathrm{LSTM}_{\boldsymbol{\theta}}\!\left(\mathbf{x}_{t-N:t}\right)$</div>
+    <div class="calib">calibrated by CO₂-decay ground truth</div>
+  </div>
+
+  <div class="arr"><svg width="100%" height="22" viewBox="0 0 680 22" preserveAspectRatio="none">
+    <line x1="340" y1="0" x2="340" y2="18" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+    <path d="M 336 14 L 340 20 L 344 14" fill="none" stroke="currentColor" stroke-width="0.8" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+
+  <!-- Tier 5: Output -->
+  <div class="block output">
+    <div class="title"><span class="lbl">(g)</span>Output to BreathFlow Layer 2</div>
+    <div class="out-grid">
+      <span>Estimated ACH:</span><span>$\widehat{\mathrm{ACH}}(t)\;\;[\mathrm{h}^{-1}]$</span>
+      <span>Confidence:</span><span>$\sigma$ &nbsp;from LSTM dropout ensemble</span>
+      <span>Feeds:</span><span>→ PMV / adaptive comfort predictor &nbsp;·&nbsp; decision layer (open / hybrid / AC)</span>
+    </div>
+  </div>
+
+  <div class="caption"><span class="num">Fig. 1.</span> <span class="desc">End-to-end pipeline from window-aperture and IEQ sensing to data-fused ACH estimation.</span></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+  renderMathInElement(document.querySelector('.fig'), {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$',  right: '$',  display: false}
+    ],
+    throwOnError: false,
+    strict: false
+  });
+
+  function reportHeight() {
+    var h = document.documentElement.scrollHeight;
+    try { parent.postMessage({ type: 'bf-arch-height', height: h }, '*'); } catch (e) {}
+  }
+  window.addEventListener('load', reportHeight);
+  window.addEventListener('resize', reportHeight);
+  setTimeout(reportHeight, 250);
+</script>
+</body>
+</html>
